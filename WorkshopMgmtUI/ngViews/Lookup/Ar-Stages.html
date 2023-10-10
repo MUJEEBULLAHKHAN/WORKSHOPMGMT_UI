@@ -1,0 +1,109 @@
+﻿<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <button data-bs-toggle="modal" data-bs-target="#AddStage" class="btn btn-primary">أضف مرحلة</button>
+                <h3 class="float-end">قائمة المراحل</h3>
+            </div>
+            <div class="table-responsive" dir="rtl">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>رقم المرحلة</th>
+                            <th>اسم المرحلة</th>
+                            <th>Stage Name</th>
+                            <th>فعل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in StagesList">
+                            <td>{{c.stageNo}}</td>
+                            <td>{{c.stageNameAr}}</td>
+                            <td>{{c.stageName}}</td>
+                            <td class="table-action">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#UpdateStage" ng-click="EditStage(c)" class="btn btn-primary my-2"><i class="fa fa-edit"></i></button>
+                                <button type="button" ng-click="DeleteStage(c.stageId)" class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="AddStage" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">أضف مرحلة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12" dir="rtl">
+                    <form name="StageForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">رقم المرحلة</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageNo" required ng-model="Stage.StageNo" placeholder="أدخل رقم المرحلة">
+                                        <span class="err-msg" ng-show="submitted==true && StageForm.StageNo.$error.required">الرجاء إدخال رقم المرحلة</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">اسم المرحلة</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageNameAr" required ng-model="Stage.StageNameAr" placeholder="أدخل اسم المرحلة">
+                                        <span class="err-msg" ng-show="submitted==true && StageForm.StageNameAr.$error.required">الرجاء إدخال اسم المرحلة</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Stage Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageName" required ng-model="Stage.StageName" placeholder="Enter a value">
+                                        <span class="err-msg" ng-show="submitted==true && StageForm.StageName.$error.required">Please enter Stage Name</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;AddStage(Stage,StageForm.$valid)">يُقدِّم</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UpdateStage" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">مرحلة التحديث</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12" dir="rtl">
+                    <form name="UpdateForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">رقم المرحلة</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageNo" required ng-model="StageDetails.stageNo" placeholder="أدخل رقم المرحلة">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.StageNo.$error.required">الرجاء إدخال رقم المرحلة</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">اسم المرحلة</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageNameAr" required ng-model="StageDetails.stageNameAr" placeholder=" أدخل اسم المرحلة">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.StageNameAr.$error.required">الرجاء إدخال اسم المرحلة</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Stage Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageName" required ng-model="Stage.stageName" placeholder="Enter a value">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.StageName.$error.required">Please enter Stage Name</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;UpdateStage(StageDetails,UpdateForm.$valid)">يُقدِّم</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

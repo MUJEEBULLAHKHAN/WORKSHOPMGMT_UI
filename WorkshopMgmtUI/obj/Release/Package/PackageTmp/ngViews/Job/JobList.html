@@ -1,0 +1,324 @@
+﻿
+<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <a href="/CreateJob" class="btn btn-primary float-end">Create new Job</a>
+                <h3>Job List</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>Vehicle Make</th>
+                            <th>Vehicle Model</th>
+                            <th>Year</th>
+                            <th>Color</th>
+                            <th>Customer Name</th>
+                            <th>Customer Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in JobList">
+                            <td>{{c.vehicleMake}}</td>
+                            <td>{{c.vehicleModel}}</td>
+                            <td>{{c.year| date : 'yyyy'}}</td>
+                            <td>{{c.colorName}}</td>
+                            <td>{{c.customerName}}</td>
+                            <td>{{c.customerType}}</td>
+                            <td class="table-action">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#JobDescription" ng-click="GetJob(c.jobId)" class="btn btn-primary my-2">View Details</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#ViewParts" ng-click="GetJob(c.jobId)" class="btn btn-primary my-2">View Parts</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    ul.details li {
+        font-size: 14px;
+        line-height: 40px;
+        float: left;
+        list-style-type: square;
+        width: 33%;
+    }
+
+        ul.details li::marker {
+            font-size: 20px;
+            list-style-type: circle;
+            color: rgba(229,165,75);
+        }
+
+    #name {
+        font-size: 10px;
+        text-align: center;
+    }
+    /*th{
+        font-size:10px;
+    }*/
+
+   
+</style>
+<div class="modal fade" id="JobDescription" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div id="contentToPrint">
+                <div class="modal-header">
+                    <h5 class="modal-title">Job card</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="container-fluid p-5">
+                    <h3>Modern Enjaz Center for Car Maintenance</h3>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card-body">
+                                <p><strong>Date of entry : {{JobDetails.jobCreated |date:'dd/MM/yyyy'}}</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <p><strong class="float-end">Time of receipt : {{JobDetails.jobCreated |date:'hh:mm a'}}</strong></p>
+                        </div>
+                        <hr />
+                        <div class="col-sm-4">
+                            <span class="font-weight-bold">Client Name : </span>
+                            <span style="font-size: 0.7rem">{{JobDetails.customerName}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="font-weight-bold">Company Name : </span>
+                            <span style="font-size: 0.7rem">{{JobDetails.workshopName}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="font-weight-bold">The Insured : </span>
+                            <span style="font-size: 0.7rem">{{JobDetails.isInsured}}</span>
+                        </div>
+                        <hr />
+                        <div class="col-sm-6">
+                            <span class="font-weight-bold">Claim number : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.jobId}}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="font-weight-bold">Odo meter : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.odometer}}</span>
+                        </div>
+                        <hr />
+                        <!--<div class="col-sm-3">
+                            <span class="font-weight-bold">Type of car : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                        </div>-->
+                        <div class="col-sm-3">
+                            <span class="font-weight-bold">Plate number : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.plateNumber}}</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="font-weight-bold">Car color : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                        </div>
+                        <!--<div class="col-sm-3">
+                            <span class="font-weight-bold">Car color : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.chassisNumber}}</span>
+                        </div>-->
+                        <hr />
+                        <!--<div class="col-sm-6">
+                            <span class="font-weight-bold">Towing van number : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.plateNumber}}</span>
+                        </div>-->
+                        <div class="col-sm-6">
+                            <span class="font-weight-bold">The Driver's name : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.customerName}}</span>
+                        </div>
+                        <hr />
+                        <!--<div class="col-sm-12">
+                            <span class="font-weight-bold">Damages : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.totalParts}}</span>
+                        </div>
+                        <hr />
+                        <div class="col-sm-12">
+                            <span class="font-weight-bold">Comments : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.odometer}}</span>
+                        </div>
+                        <hr />-->
+                        <div class="col-sm-12">
+                            <span class="font-weight-bold">Comments : </span>
+                            <!--<span style="font-size: 0.8rem">{{JobDetails.odometer}}</span>-->
+                        </div>
+                        <hr />
+                        <div class="container-fluid p-3">
+                            <h3>Car Accessories</h3>
+                        </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <table class="table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>Parts Name</th>
+                                                    <th>Available</th>
+                                                    <th>Not Available</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Spare Tyre</td>
+                                                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.spareTyre" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.spareTyre" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Number plate</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.numberPlates" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.numberPlates" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CD Player</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.cdPlay" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.cdPlay" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tool kit</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.toolKit" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.toolKit" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Air condition</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.airCondition" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.airCondition" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ABS light</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.absLight" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.absLight" ng-value="false"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <table class="table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>Parts Name</th>
+                                                    <th>Available</th>
+                                                    <th>Not Available</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Car key</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.carKey" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.carKey" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Check engine light</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.checkEngineLight" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.checkEngineLight" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Batteries</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.batteries" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.batteries" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Wheel caps</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.wheelCaps" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.wheelCaps" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Airbags light</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.airbagsLight" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.airbagsLight" ng-value="false"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Floor mats</td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.floorMats" ng-value="true"></td>
+                                                    <td><input class="form-check-input" type="radio" disabled ng-model="JobDetails.floorMats" ng-value="false"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="">
+
+                                    <span><img class="img-thumbnail rounded me-2 mb-2" height="200" width="200" src="/img/CarBluePrint.jpg" /></span>
+
+
+                                </div>
+                            </div>
+                       
+
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                        <span style="font-size:10px" class="font-weight-bold">1- Authorisde to open car parts and fixed </span>
+                    </div>
+                    <div class="col-sm-12">
+                        <span style="font-size:10px" class="font-weight-bold">2- The center is not responsible for personal items in the car </span>
+                    </div>
+                    <div class="col-sm-12">
+                        <span style="font-size:10px" class="font-weight-bold">3- If the car is delayed after for completing the repairs for ten days, I pledge to pay a twenty-five (25 SAR) fine. for every day </span>
+                    </div>
+                    <div class="col-sm-12">
+                        <span style="font-size:10px" class="font-weight-bold">4- The workshop has the right to test the car after completing the repair (outside and in the workshop) </span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="font-weight-bold">Mobile number : </span>
+                        <span style="font-size: 0.8rem">{{JobDetails.mobileNo}}</span>
+                    </div>
+                    <!--<div class="col-sm-6">
+                        <span class="font-weight-bold">Mobile number -2</span>
+                        <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="font-weight-bold">Car received by  </span>
+                        <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                    </div>-->
+                    <div class="col-sm-6">
+                        <span class="font-weight-bold">Client Signature</span>
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                        <h3>Riyadh - Exit 18 Industrial ring road Behind Al-Eis company</h3>
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="button" ng-click="print()" class="btn btn-primary my-2">Print</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="ViewParts" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Vehicle Spare Parts</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="col-md-12">
+                <!--<h1 class="text-center"></h1>-->
+                <div class="card">
+                    <div class="card-body" id="partscontent">
+                        <ul ng-show="partsArray.length>1 || partsArray!=''">
+                            <li ng-repeat="item in partsArray"> {{ item }}</li>
+                        </ul>
+
+                    </div>
+                    <div class="text-center">
+                        <button type="button" ng-click="PrintParts()" class="btn btn-primary my-2">Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

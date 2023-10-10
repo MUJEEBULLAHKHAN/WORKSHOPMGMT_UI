@@ -1,0 +1,98 @@
+﻿<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <button data-bs-toggle="modal" data-bs-target="#AddRole" class="btn btn-primary float-end">Add Role</button>
+                <h3>Roles List</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>Role Name</th>
+                            <th>Role Name (Ar)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in RolesList">
+                            <td>{{c.roleName}}</td>
+                            <td>{{c.roleNameAr}}</td>
+                            <td class="table-action">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#UpdateRole" ng-click="EditRole(c)" class="btn btn-primary my-2"><i class="fa fa-edit"></i></button>
+                                <button type="button" ng-click="DeleteRole(c.roleId)" class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="AddRole" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="RoleForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Role Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="RoleName" required ng-model="Role.RoleName" placeholder="Enter a value">
+                                        <span class="err-msg" ng-show="submitted==true && RoleForm.RoleName.$error.required">Please enter Role Name</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">اسم الدور</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="RoleNameAr" required ng-model="Role.RoleNameAr" placeholder="أدخل اسم الدور">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.RoleNameAr.$error.required">الرجاء إدخال اسم الدور</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;AddRole(Role,RoleForm.$valid)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UpdateRole" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="UpdateForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Role Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="RoleName" required ng-model="RoleDetails.roleName" placeholder="Enter a value">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.RoleName.$error.required">Please enter Role Name</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">اسم الدور</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="RoleNameAr" required ng-model="RoleDetails.roleNameAr" placeholder="أدخل اسم الدور">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.RoleNameAr.$error.required">الرجاء إدخال اسم الدور</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;UpdateRole(RoleDetails,UpdateForm.$valid)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

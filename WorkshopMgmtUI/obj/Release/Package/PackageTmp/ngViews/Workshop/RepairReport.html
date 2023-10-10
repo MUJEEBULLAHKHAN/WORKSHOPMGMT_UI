@@ -1,0 +1,114 @@
+﻿
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body m-sm-3 m-md-5" id="contentToPrint">
+                <div class="mb-4">
+                    <strong>{{InvoiceDetails.vehicleMake}}</strong> {{InvoiceDetails.vehicleModel}},
+                    <!--<br /> This is the receipt for a payment of <strong>{{InvoiceDetails.laborCharge}}</strong>-->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-muted">Claim No.</div>
+                        <strong>{{InvoiceDetails.jobId}}</strong>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <div class="text-muted">Date</div>
+                        <strong>{{InvoiceDetails.invDate | date:'dd-MMM-yyyy'}}</strong>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="text-muted">Vehicle</div>
+                        <strong>
+                            Make Name :
+                        </strong>{{InvoiceDetails.vehicleMake}}
+                        <p>
+                            <strong>Model name : </strong>{{InvoiceDetails.vehicleModel}}
+
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <div class="text-muted">More Info</div>
+                        <strong>
+                            plate number :
+                        </strong>{{InvoiceDetails.plateNo}}
+                        <p>
+                            <strong>
+                                Color :
+                            </strong>{{InvoiceDetails.color}}
+                            <!--<br> Denver <br> 80202 <br> USA <br>
+                            <a href="#">
+                                info@appstack.com
+                            </a>-->
+                        </p>
+                    </div>
+                </div>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <td>&nbsp;</td>
+                            <th class="text-end">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Repair fees</td>
+                            <td>&nbsp;</td>
+                            <td class="text-end">{{InvoiceDetails.laborCharge}}</td>
+                        </tr>
+                        <tr>
+                            <td>Spare parts after discount </td>
+                            <td>&nbsp;</td>
+                            <td class="text-end">0.00</td>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Total before tax</th>
+                            <th class="text-end">{{InvoiceDetails.laborCharge}}</th>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Tax</th>
+                            <th class="text-end">15%</th>
+                        </tr>
+
+                        <!--<tr>
+                            <th>&nbsp;</th>
+                            <th>Subtotal </th>
+                            <th class="text-end">$275.00</th>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Shipping </th>
+                            <th class="text-end">$8.00</th>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Discount </th>
+                            <th class="text-end">5%</th>
+                        </tr>-->
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Total after tax </th>
+                            <th class="text-end">{{InvoiceDetails.totalCharge}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+
+               
+            </div>
+            <div class="text-center mb-2">
+                <button ng-click="print()" class="btn btn-primary">
+                    Print this receipt
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+﻿<div class="container d-flex flex-column">
+    <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+            <div class="d-table-cell align-middle">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="m-sm-4">
+                            <div class="text-center">
+                                <img class="img-responsive logo-img" src="img/Logo.png" />
+                            </div>
+
+                            <div class="text-center mt-4">
+
+                                <p class="lead">
+                                    Sign in to your account to continue
+                                </p>
+                                <div>
+                                    <label class="form-check form-check-inline">
+                                        <input class="form-check-input" ng-checked="true" ng-model="UserType" type="radio" name="Workshop" value="Workshop">
+                                        <span class="form-check-label">
+                                            Workshop
+                                        </span>
+                                    </label>
+                                    <label class="form-check form-check-inline">
+                                        <input class="form-check-input" ng-model="UserType" type="radio" name="User" value="User">
+                                        <span class="form-check-label">
+                                            User
+                                        </span>
+                                    </label>
+                                    <label class="form-check form-check-inline">
+                                        <input class="form-check-input" ng-model="UserType" type="radio" name="Owner" value="Owner">
+                                        <span class="form-check-label">
+                                            Owner
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr />
+                            <form name="Loginform" novalidate autocomplete="off">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="floatingInput1" ng-model="EmailId" placeholder="name@example.com" control-id="ControlID-3">
+                                    <label for="floatingInput1">Email address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingInput1" ng-model="Password" placeholder="name@example.com" control-id="ControlID-3">
+                                    <label for="floatingInput1">Password</label>
+                                    <!--<small>
+                <a href="#" class="forgot" data-bs-toggle="modal" data-bs-target="#centeredModalSuccess">Forgot password?</a>
+            </small>-->
+                                </div>
+
+                                <!--<div>
+            <div class="form-check align-items-center">
+                <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked="" control-id="ControlID-3">
+                <label class="form-check-label text-small" for="customControlInline">Remember me next time</label>
+            </div>
+        </div>-->
+                                <div class="text-center mt-3">
+                                    <button style="width:100%;" ng-click="submitted=true;Login(Loginform.$valid)" type="submit" class="btn">Continue</button>
+                                </div>
+                                <!--<hr />
+        <div class="flex-grow-1">
+            <span class="float-end"><small>New Originator? </small><a href="/RegisterOrig">SignUp </a><small>here</small></span>
+            <small>New Customer? </small><a href="/Register">SignUp </a><small>here</small>
+        </div>-->
+                            </form>
+                            <p class="text-center mt-2">
+                                Select Language
+                            </p>
+                            <label>
+                                <input type="radio" ng-change="RadioChange('en')" ng-model="langname" value="en">
+                                English
+                            </label><br />
+                            <label>
+                                <input type="radio" ng-change="RadioChange('ar')" ng-model="langname" value="ar">
+                                Arabic
+                            </label>
+                            <!--<form name="ForgotPwdForm" novalidate autocomplete="off">
+        <div class="modal fade" id="centeredModalSuccess" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Forgot Password ?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body m-3">
+                        <label class="form-label" for="Email">Enter your Registered Email Id</label>
+                        <input type="email" class="form-control" id="inputEmail4" name="Email" ng-model="Email" placeholder="Email" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" ng-click="submitted=true;SendMail(Email, ForgotPwdForm.$valid)" class="btn btn-success">Send Email</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

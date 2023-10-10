@@ -1,0 +1,42 @@
+﻿<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .board {
+        display: flex;
+    }
+
+    .column {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f5f5f5;
+        margin: 10px;
+        min-width: 200px;
+    }
+
+    .card {
+        padding: 8px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        margin: 4px 0;
+        cursor: pointer;
+    }
+</style>
+    <div class="board">
+        <div ng-repeat="x in StageList" class="column" id={{x.id}}>
+            {{x.name}}
+            <div ng-repeat="x in JobList" class="card" draggable="true">{{x.name}}</div>
+            <!--<div class="card" draggable="true">Task 2</div>-->
+        </div>
+        <!--<div class="column" id="inProgress">
+            <h3>inProgress</h3>
+            <div class="card" draggable="true">Task 3</div>
+        </div>
+        <div class="column" id="done">
+            <h3>done</h3>
+            <div class="card" draggable="true">Task 4</div>
+            <div class="card" draggable="true">Task 5</div>
+        </div>-->
+    </div>

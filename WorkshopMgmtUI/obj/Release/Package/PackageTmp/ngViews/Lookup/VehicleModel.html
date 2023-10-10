@@ -1,0 +1,113 @@
+﻿<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <button data-bs-toggle="modal" data-bs-target="#AddVehicleModel" class="btn btn-primary float-end">Add VehicleModel</button>
+                <h3>VehicleModels List</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>Vehicle Make Name</th>
+                            <th>Vehicle Make Name (Ar)</th>
+                            <th>Vehicle Model Name</th>
+                            <th>Vehicle Model Name (Ar)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in VehicleModelsList">
+                            <td>{{c.vehicleMakeName}}</td>
+                            <td>{{c.vehicleMakeNameAr}}</td>
+                            <td>{{c.vehicleModelName}}</td>
+                            <td>{{c.vehicleModelNameAr}}</td>
+                            <td class="table-action">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#UpdateVehicleModel" ng-click="EditVehicleModel(c)" class="btn btn-primary my-2"><i class="fa fa-edit"></i></button>
+                                <button type="button" ng-click="DeleteVehicleModel(c.vehicleModelId)" class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="AddVehicleModel" tabindex="-1" VehicleModel="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" VehicleModel="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add VehicleModel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="VehicleModelForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <select style="max-width:100%;" class="form-control mb-3 form-inline" name="VehicleMakeId" ng-model="VehicleModel.VehicleMakeId" required control-id="ControlID-21">
+                                                <option value="">--Select Vehicle Make--</option>
+                                                <option ng-repeat="x in VehicleMakeList" value="{{x.vehicleMakeId}}">{{x.vehicleMakeName}}</option>
+                                            </select>
+                                            <label for="floatingInput1">Vehicle Make Name<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && UserForm.RoleId.$error.required">Please select Vehicle make</span>
+                                        </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="sr-only" for="inlineFormInputName2">VehicleModel Name</label>
+                                            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="VehicleModelName" required ng-model="VehicleModel.VehicleModelName" placeholder="Enter a VehicleModel">
+                                            <span class="err-msg" ng-show="submitted==true && VehicleModelForm.VehicleModelName.$error.required">Please enter VehicleModel Name</span>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;AddVehicleModel(VehicleModel,VehicleModelForm.$valid)">Submit</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UpdateVehicleModel" tabindex="-1" VehicleModel="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" VehicleModel="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update VehicleModel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="UpdateForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <select style="max-width:100%;" class="form-control mb-3 form-inline" ng-options="c.vehicleMakeId as c.vehicleMakeName for c in VehicleMakeList" name="VehicleMakeId" ng-model="VehicleModelDetails.vehicleMakeId" required control-id="ControlID-21">
+                                                <option value="">--Select Vehicle Make--</option>
+                                            </select>
+                                            <label for="floatingInput1">Vehicle Make Name<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && UserForm.RoleId.$error.required">Please select Vehicle make</span>
+                                        </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="sr-only" for="inlineFormInputName2">VehicleModel Name</label>
+                                            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="VehicleModelName" required ng-model="VehicleModelDetails.vehicleModelName" placeholder="Enter a Vehicle Model">
+                                            <span class="err-msg" ng-show="submitted==true && UpdateForm.VehicleModelName.$error.required">Please enter VehicleModel Name</span>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;UpdateVehicleModel(VehicleModelDetails,UpdateForm.$valid)">Submit</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

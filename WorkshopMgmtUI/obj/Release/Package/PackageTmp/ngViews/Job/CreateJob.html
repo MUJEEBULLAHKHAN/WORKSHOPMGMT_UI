@@ -1,0 +1,496 @@
+﻿<div class="container d-flex flex-column">
+    <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-12 mx-auto d-table h-100">
+
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="text-center mt-4">
+                        <h1 class="h2">Create Job</h1>
+                        <p class="lead">
+
+                        </p>
+                    </div>
+                    <hr />
+                    <style type="text/css">
+                        .item-list {
+                            list-style: none;
+                            padding: 0;
+                            margin: 20px;
+                        }
+
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 8px;
+                            padding: 8px;
+                            border: 1px solid #ccc;
+                            border-radius: 4px;
+                        }
+
+                        .remove-button {
+                            padding: 4px 8px;
+                            background-color: #ff4444;
+                            color: #fff;
+                            border: none;
+                            border-radius: 4px;
+                            cursor: pointer;
+                        }
+
+                            .remove-button:hover {
+                                background-color: #cc0000;
+                            }
+
+                        .row .card-img-top {
+                            width: 200px;
+                            height: 150px;
+                            border: 1px solid black;
+                            margin: 10px 10px;
+                        }
+                    </style>
+                    <div class="m-sm-4">
+                        <form name="CreateJobform" novalidate autocomplete="off">
+                            <div class="mb-3">
+
+                                <!--<div class="container">
+            <input type="text" ng-model="newValue" placeholder="Enter a value">
+            <button ng-click="addValue($index)">Add</button>
+        </div>
+
+        <ul class="item-list">
+            <li ng-repeat="item in array" class="item">
+                {{ item }}
+                <button ng-click="removeValue($index)" class="remove-button">Remove</button>
+            </li>
+        </ul>-->
+                                <div class="">
+                                    <h3>Customer</h3>
+                                </div>
+                                <hr />
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" name="CustomerName" ng-model="Job.CustomerName" placeholder="name@example.com" required control-id="ControlID-3">
+                                            <label for="floatingInput1">Customer Name<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.CustomerName.$error.required">Please enter Customer Name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" name="EmailId" ng-model="Job.Email" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">Email address<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.EmailId.$error.required">Please enter Email address</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" ng-pattern="/^05\d{8}$/" name="MobileNo" ng-model="Job.MobileNo" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">Mobile No #<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.MobileNo.$error.required">Please enter Mobile No</span>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.MobileNo.$error.pattern">Please enter valid Mobile No</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Gender<span class="text-danger">*</span></h6>
+                                        </div>
+                                        <div ng-init="Job.Gender = 'Male'">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.Gender" type="radio" name="Male" value="Male">
+                                                <span class="form-check-label">
+                                                    Male
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.Gender" type="radio" name="Female" value="Female">
+                                                <span class="form-check-label">
+                                                    Female
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <select style="max-width:100%;" class="form-control mb-3 form-inline" name="CustomerType" ng-model="Job.CustomerType" required control-id="ControlID-21">
+                                                <option value="">--Select Customer Type--</option>
+                                                <option ng-repeat="x in CustomerTypeList" value="{{x.customerTypeId}}">{{x.customerTypeName}}</option>
+                                            </select>
+                                            <label for="floatingInput1">Customer Type<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.CustomerType.$error.required">Please select Customer Type</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="floatingInput1" ng-maxlength="150" rows="3" name="Address" ng-model="Job.Address" placeholder="name@example.com" control-id="ControlID-3"></textarea>
+                                        <label for="floatingInput1">Address</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <h3>Vehicle Information</h3>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <select style="max-width:100%;" class="form-control mb-3 form-inline" ng-change="GetVehicleModel(Job.VehicleMakeId)" name="VehicleMakeId" ng-model="Job.VehicleMakeId" required control-id="ControlID-21">
+                                            <option value="">--Select Vehicle Make--</option>
+                                            <option ng-repeat="x in VehicleMakeList" value="{{x.vehicleMakeId}}">{{x.vehicleMakeName}}</option>
+                                        </select>
+                                        <label for="floatingInput1">Vehicle Make<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.VehicleMakeId.$error.required">Please select Vehicle Make</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <select style="max-width:100%;" class="form-control mb-3 form-inline" name="VehicleModelId" ng-model="Job.VehicleModelId" required control-id="ControlID-21">
+                                            <option value="">--Select Vehicle Model--</option>
+                                            <option ng-repeat="x in VehicleModelList" value="{{x.vehicleModelId}}">{{x.vehicleModelName}}</option>
+                                        </select>
+                                        <label for="floatingInput1">Vehicle Model<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.VehicleModelId.$error.required">Please select vehicle Model</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <select style="max-width:100%;" class="form-control mb-3 form-inline" name="ColorId" ng-model="Job.ColorId" required control-id="ControlID-21">
+                                            <option value="">--Select Color--</option>
+                                            <option ng-repeat="x in ColorList" value="{{x.colorId}}">{{x.colorName}}</option>
+                                        </select>
+                                        <label for="floatingInput1">Color<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.ColorId.$error.required">Please select Color</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-control mb-3">
+                                        <label for="floatingInput1">Year<span class="text-danger">*</span></label>
+                                        <input class="form-control"
+                                               name="Year"
+                                               start-view="month" moment-picker="Year"
+                                               format="YYYY"
+                                               style="padding-left: 10px;"
+                                               ng-model="Job.Year"
+                                               autocomplete="off" placeholder="Select Year">
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.Year.$error.required">Please enter Year</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput1" name="ChassisNumber" ng-model="Job.ChassisNumber" placeholder="name@example.com" control-id="ControlID-3">
+                                        <label for="floatingInput1">Chassis Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput1" name="PlateNumber" required ng-model="Job.PlateNumber" placeholder="name@example.com" control-id="ControlID-3">
+                                        <label for="floatingInput1">Plate Number<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.PlateNumber.$error.required">Please enter Year</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput1" name="Odometer" ng-model="Job.Odometer" placeholder="name@example.com" control-id="ControlID-3">
+                                        <label for="floatingInput1">Odometer</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" ng-model="Job.IsInsured" value="IsInsured">
+                                                <span class="form-check-label">
+                                                    Is Insured
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" ng-model="Job.IsCorporate" value="IsCorporate">
+                                                <span class="form-check-label">
+                                                    Is Corporate
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Spare Tyre<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.SpareTyre = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.SpareTyre" type="radio" name="SpareTyre" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.SpareTyre" type="radio" name="NoSpareTyre" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Number Plates<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.NumberPlates = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.NumberPlates" type="radio" name="NumberPlates" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.NumberPlates" type="radio" name="NoNumberPlates" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Cd Play<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.CdPlay = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.CdPlay" type="radio" name="CdPlay" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.CdPlay" type="radio" name="NoCdPlay" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">ToolKit<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.ToolKit = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.ToolKit" type="radio" name="ToolKit" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.ToolKit" type="radio" name="NoToolKit" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Air Condition<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.AirCondition = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.AirCondition" type="radio" name="AirCondition" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.AirCondition" type="radio" name="NoAirCondition" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Car Key<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.CarKey = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.CarKey" type="radio" name="CarKey" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.CarKey" type="radio" name="NoCarKey" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Check Engine Light<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.CheckEngineLight = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.CheckEngineLight" type="radio" name="CheckEngineLight" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.CheckEngineLight" type="radio" name="NoCheckEngineLight" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Batteries<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.Batteries = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.Batteries" type="radio" name="Batteries" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.Batteries" type="radio" name="NoBatteries" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Wheel Caps<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.WheelCaps = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.WheelCaps" type="radio" name="WheelCaps" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.WheelCaps" type="radio" name="NoWheelCaps" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Airbags Light<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.AirbagsLight = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.AirbagsLight" type="radio" name="AirbagsLight" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.AirbagsLight" type="radio" name="NoAirbagsLight" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">ABS Light<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.ABSLight = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.ABSLight" type="radio" name="ABSLight" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.ABSLight" type="radio" name="NoABSLight" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">Floor Mats<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.FloorMats = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.FloorMats" type="radio" name="Available" value="true">
+                                                <span class="form-check-label">
+                                                    Available
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.FloorMats" type="radio" name="NotAvailable" value="false">
+                                                <span class="form-check-label">
+                                                    Not Available
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="inputAddress2">Images</label>
+                                <input type="file" class="form-control" id="image-input" accept=".png,.jpg" multiple />
+                                <div class="row" id="image-list"></div>
+                            </div>
+                            <hr />
+                            <div class="text-center mt-3">
+                                <button style="width:30%;" ng-click="submitted=true;CreateJob(Job,CreateJobform.$valid)" type="submit" class="btn btn-outline-warning">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

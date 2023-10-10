@@ -1,0 +1,495 @@
+﻿<div class="container d-flex flex-column" dir="rtl">
+    <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-12 mx-auto d-table h-100">
+
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="text-center mt-4">
+                        <h1 class="h2">إنشاء وظيفة جديدة</h1>
+                        <p class="lead">
+
+                        </p>
+                    </div>
+                    <hr />
+                    <style type="text/css">
+                        .item-list {
+                            list-style: none;
+                            padding: 0;
+                            margin: 20px;
+                        }
+
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 8px;
+                            padding: 8px;
+                            border: 1px solid #ccc;
+                            border-radius: 4px;
+                        }
+
+                        .remove-button {
+                            padding: 4px 8px;
+                            background-color: #ff4444;
+                            color: #fff;
+                            border: none;
+                            border-radius: 4px;
+                            cursor: pointer;
+                        }
+
+                            .remove-button:hover {
+                                background-color: #cc0000;
+                            }
+
+                        .row .card-img-top {
+                            width: 200px;
+                            height: 150px;
+                            border: 1px solid black;
+                            margin: 10px 10px;
+                        }
+                    </style>
+                    <div class="m-sm-4">
+                        <form name="CreateJobform" novalidate autocomplete="off">
+                            <div class="mb-3">
+
+                                <!--<div class="container">
+                                    <input type="text" ng-model="newValue" placeholder="Enter a value">
+                                    <button ng-click="addValue($index)">Add</button>
+                                </div>
+
+                                <ul class="item-list">
+                                    <li ng-repeat="item in array" class="item">
+                                        {{ item }}
+                                        <button ng-click="removeValue($index)" class="remove-button">Remove</button>
+                                    </li>
+                                </ul>-->
+                                <div class="">
+                                    <h3>عميل</h3>
+                                </div>
+                                <hr />
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" name="CustomerName" ng-model="Job.CustomerName" placeholder="name@example.com" required control-id="ControlID-3">
+                                            <label for="floatingInput1">اسم الزبون<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.CustomerName.$error.required">الرجاء إدخال اسم العميل</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" name="EmailId" ng-model="Job.Email" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">بريد إلكتروني<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.EmailId.$error.required">الرجاء إدخال عنوان البريد الإلكتروني</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" ng-pattern="/^05\d{8}$/" name="MobileNo" ng-model="Job.MobileNo" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">رقم الهاتف المحمول #<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.MobileNo.$error.required">الرجاء إدخال رقم الجوال</span>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.MobileNo.$error.pattern">الرجاء إدخال رقم جوال صالح</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">جنس<span class="text-danger">*</span></h6>
+                                        </div>
+                                        <div ng-init="Job.Gender = 'Male'">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.Gender" type="radio" name="Male" value="Male">
+                                                <span class="form-check-label">
+                                                    ذكر
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.Gender" type="radio" name="Female" value="Female">
+                                                <span class="form-check-label">
+                                                    أنثى
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <select style="max-width:100%;" class="form-control mb-3 form-inline" name="CustomerType" ng-model="Job.CustomerType" required control-id="ControlID-21">
+                                                <option value="">--حدد نوع العميل--</option>
+                                                <option ng-repeat="x in CustomerTypeList" value="{{x.customerTypeId}}">{{x.customerTypeName}}</option>
+                                            </select>
+                                            <label for="floatingInput1">نوع العميل<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && CreateJobform.CustomerType.$error.required">الرجاء تحديد نوع العميل</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="floatingInput1" ng-maxlength="150" rows="3" name="Address" ng-model="Job.Address" placeholder="name@example.com" control-id="ControlID-3"></textarea>
+                                        <label for="floatingInput1">عنوان</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <h3>معلومات السيارة</h3>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <select style="max-width:100%;" class="form-control mb-3 form-inline" ng-change="GetVehicleModel(Job.VehicleMakeId)" name="VehicleMakeId" ng-model="Job.VehicleMakeId" required control-id="ControlID-21">
+                                            <option value="">--اختر ماركة السيارة--</option>
+                                            <option ng-repeat="x in VehicleMakeList" value="{{x.vehicleMakeId}}">{{x.vehicleMakeName}}</option>
+                                        </select>
+                                        <label for="floatingInput1">صناعة المركبات<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.VehicleMakeId.$error.required">الرجاء تحديد نوع السيارة</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <select style="max-width:100%;" class="form-control mb-3 form-inline" name="VehicleModelId" ng-model="Job.VehicleModelId" required control-id="ControlID-21">
+                                            <option value="">--حدد طراز السيارة--</option>
+                                            <option ng-repeat="x in VehicleModelList" value="{{x.vehicleModelId}}">{{x.vehicleModelName}}</option>
+                                        </select>
+                                        <label for="floatingInput1">نموذج السيارة<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.VehicleModelId.$error.required">الرجاء تحديد طراز السيارة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <select style="max-width:100%;" class="form-control mb-3 form-inline" name="ColorId" ng-model="Job.ColorId" required control-id="ControlID-21">
+                                            <option value="">--إختر لون--</option>
+                                            <option ng-repeat="x in ColorList" value="{{x.colorId}}">{{x.colorName}}</option>
+                                        </select>
+                                        <label for="floatingInput1">لون<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.ColorId.$error.required">الرجاء تحديد اللون</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-control mb-3">
+                                        <label for="floatingInput1">Year<span class="text-danger">*</span></label>
+                                        <input class="form-control"
+                                               name="Year"
+                                               start-view="month" moment-picker="Year"
+                                               format="YYYY"
+                                               style="padding-left: 10px;"
+                                               ng-model="Job.Year"
+                                               autocomplete="off" placeholder="اختر السنة">
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.Year.$error.required">الرجاء إدخال السنة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput1" name="ChassisNumber" ng-model="Job.ChassisNumber" placeholder="name@example.com" control-id="ControlID-3">
+                                        <label for="floatingInput1">رقم الهيكل</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput1" name="PlateNumber" required ng-model="Job.PlateNumber" placeholder="name@example.com" control-id="ControlID-3">
+                                        <label for="floatingInput1">رقم لوحة<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && CreateJobform.PlateNumber.$error.required">الرجاء إدخال السنة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput1" name="Odometer" ng-model="Job.Odometer" placeholder="name@example.com" control-id="ControlID-3">
+                                        <label for="floatingInput1">عداد المسافات</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating mb-3">
+                                        <div>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" ng-model="Job.IsInsured" value="IsInsured">
+                                                <span class="form-check-label">
+                                                    مؤمن
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" ng-model="Job.IsCorporate" value="IsCorporate">
+                                                <span class="form-check-label">
+                                                    هل الشركات
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">كفر احتياطي<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.SpareTyre = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.SpareTyre" type="radio" name="SpareTyre" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.SpareTyre" type="radio" name="NoSpareTyre" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">اللوحات<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.NumberPlates = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.NumberPlates" type="radio" name="NumberPlates" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.NumberPlates" type="radio" name="NoNumberPlates" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">المسجل<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.CdPlay = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.CdPlay" type="radio" name="CdPlay" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.CdPlay" type="radio" name="NoCdPlay" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">العدة<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.ToolKit = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.ToolKit" type="radio" name="ToolKit" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.ToolKit" type="radio" name="NoToolKit" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">المكيف<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.AirCondition = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.AirCondition" type="radio" name="AirCondition" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.AirCondition" type="radio" name="NoAirCondition" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">مفتاح تشغيل<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.CarKey = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.CarKey" type="radio" name="CarKey" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.CarKey" type="radio" name="NoCarKey" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">لمية ماكينة<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.CheckEngineLight = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.CheckEngineLight" type="radio" name="CheckEngineLight" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.CheckEngineLight" type="radio" name="NoCheckEngineLight" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">البطاريات<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.Batteries = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.Batteries" type="radio" name="Batteries" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.Batteries" type="radio" name="NoBatteries" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">طاسات<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.WheelCaps = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.WheelCaps" type="radio" name="WheelCaps" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.WheelCaps" type="radio" name="NoWheelCaps" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">لية إيرباج<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.AirbagsLight = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.AirbagsLight" type="radio" name="AirbagsLight" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.AirbagsLight" type="radio" name="NoAirbagsLight" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">لمية ABS<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.ABSLight = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.ABSLight" type="radio" name="ABSLight" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.ABSLight" type="radio" name="NoABSLight" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle text">فرشات أرضية<span class="text-danger"></span></h6>
+                                        </div>
+                                        <div ng-init="Job.FloorMats = true">
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-checked="true" ng-model="Job.FloorMats" type="radio" name="Available" value="true">
+                                                <span class="form-check-label">
+                                                    موجود
+                                                </span>
+                                            </label>
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input" ng-model="Job.FloorMats" type="radio" name="NotAvailable" value="false">
+                                                <span class="form-check-label">
+                                                    غیر موجود
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="inputAddress2">صورة</label>
+                                <input type="file" class="form-control" id="image-input" accept=".png,.jpg" multiple />
+                                <div class="row" id="image-list"></div>
+                            </div>
+                            <hr />
+                            <div class="text-center mt-3">
+                                <button style="width:30%;" ng-click="submitted=true;CreateJob(Job,CreateJobform.$valid)" type="submit" class="btn btn-outline-warning">يُقدِّم</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

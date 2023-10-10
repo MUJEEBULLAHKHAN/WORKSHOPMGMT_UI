@@ -1,0 +1,260 @@
+﻿
+
+<div style="flex-grow: 1;">
+    <div id="dp"></div>
+</div>
+<style>
+    ul.details li {
+        font-size: 14px;
+        line-height: 50px;
+        float: left;
+        list-style-type: square;
+        width: 50%;
+    }
+
+        ul.details li::marker {
+            font-size: 20px;
+            list-style-type: circle;
+            color: rgba(229,165,75);
+        }
+</style>
+<div class="row mt-3" id="ShowDetails">
+    <div class="col-md-8">
+        <div class="col-md mb-4 mb-md-0">
+            <div class="accordion mt-3" id="accordionExample">
+                <div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
+                            Description & Parts
+                        </button>
+                    </h2>
+
+                    <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul ng-repeat="x in jsonObject">
+                                <li style="display:inline"><strong>Description : </strong>{{x.Description}}</li>
+                                <li class="mx-1" style="display:inline"><strong>EstPrice : </strong>{{x.EstPrice}}</li>
+                                <li class="mx-1" style="display:inline"><strong>EstTime : </strong>{{x.EstTime}}</li>
+                            </ul>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#AddCharges" ng-show="lastItemId==JobDetails.stageId" class="btn btn-primary my-2">Add Parts and charges</button>
+
+                            <div ng-show="RoleName=='Estimator' && lastItemId!=JobDetails.stageId">
+                                <button type="button" data-bs-toggle="modal" ng-show="JobDetails.jobDescription==null" data-bs-target="#UpdateJobDescription" class="btn btn-primary my-2">Add Description</button>
+                                <button type="button" data-bs-toggle="modal" ng-show="JobDetails.jobDescription!=null" data-bs-target="#UpdateJobDescription" class="btn btn-primary my-2">Update Description</button>
+                            </div>
+                            <ul>
+                                <li ng-repeat="x in partsArray" class="mx-2" style="display:inline">{{x}}</li>
+
+                            </ul>
+                            <div ng-show="RoleName=='Estimator' && lastItemId!=JobDetails.stageId">
+                                <button type="button" data-bs-toggle="modal" ng-show="JobDetails.vehicleParts==null" data-bs-target="#UpdateVehicleParts" class="btn btn-primary my-2">Add Vehicle Parts</button>
+                                <button type="button" data-bs-toggle="modal" ng-show="JobDetails.vehicleParts!=null" data-bs-target="#UpdateVehicleParts" class="btn btn-primary my-2">Update Vehicle Parts</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                            Details
+                        </button>
+                    </h2>
+                    <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul class="details">
+                                <li>
+                                    <span class="font-weight-bold">Color : </span>
+                                    <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold">Chassis Number : </span>
+                                    <span style="font-size: 0.8rem">{{JobDetails.chassisNumber}}</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold">Plate Number : </span>
+                                    <span style="font-size: 0.8rem">{{JobDetails.plateNumber}}</span>
+                                </li>
+                                <li class="details">
+                                    <span class="font-weight-bold">Odometer : </span>
+                                    <span style="font-size: 0.8rem">{{JobDetails.odometer}}</span>
+                                </li>
+                                <li class="details">
+                                    <span class="font-weight-bold">Is Corporate : </span>
+                                    <span ng-show="JobDetails.isCorporate" style="font-size: 0.8rem">Yes</span>
+                                    <span ng-show="!JobDetails.isCorporate" style="font-size: 0.8rem">No</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold">Is Insured : </span>
+                                    <span ng-show="JobDetails.isInsured" style="font-size: 0.8rem">Yes</span>
+                                    <span ng-show="!JobDetails.isInsured" style="font-size: 0.8rem">No</span>
+                                </li>
+                            </ul>
+                            <h2 class="card-title">Vehicle Images</h2>
+                            <div style="display:inline" ng-repeat="x in JobDetails.vehiclePictures">
+                                <span><img class="img-thumbnail rounded me-2 mb-2" height="140" width="140" src="{{dotnetfilepath}}{{x.vehiclePic}}" /></span>
+                            </div>
+                            <div class="float-end">
+                                <button type="button" id="PickJob" ng-hide="lastItemId==JobDetails.stageId" ng-click="StartJob(JobDetails.jobId,JobDetails.stageId)" class="btn btn-primary my-2">Pick the job</button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="UpdateJobDescription" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Description</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="AddDescform" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Description</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="description" ng-model="JobDetails.description" required placeholder="Enter a Description">
+                                        <span class="err-msg" ng-show="submitted==true && AddDescform.description.$error.required">Please enter Description</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Estmated Time</label>
+                                        <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="estTime" ng-model="JobDetails.estTime" required placeholder="Enter an Estimated Time">
+                                        <span class="err-msg" ng-show="submitted==true && AddDescform.estTime.$error.required">Please enter Estimated Time</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Estmated Price</label>
+                                        <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="estPrice" ng-model="JobDetails.estPrice" required placeholder="Enter an Estmated Price">
+                                        <span class="err-msg" ng-show="submitted==true && AddDescform.estPrice.$error.required">Please enter Estmated Price</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="addValue($index,AddDescform.$valid,JobDetails)"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <ul class="item-list" ng-show="array.length>1 || array!=''">
+                                    <li ng-repeat="item in array track by $index" class="item">
+                                        <ul>
+                                            <li style="display:inline">Description : {{ item.Description }}</li>
+                                            <li style="display:inline">Estimated Time : {{ item.EstTime }}</li>
+                                            <li style="display:inline">Estimated Price : {{ item.EstPrice }}</li>
+                                            <li style="display:inline"><button ng-click="removeValue($index)" class="btn btn-sm-primary"><i class="fa fa-minus"></i></button></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" ng-click="submitted=true;UpdateJobDesc()" class="btn btn-outline-warning">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="AddCharges" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add No of Parts & Charges</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="AddChargesform" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">No of Parts</label>
+                                        <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="TotalParts" ng-model="Charges.TotalParts" required placeholder="Enter Total No of Parts">
+                                        <span class="err-msg" ng-show="submitted==true && AddChargesform.TotalParts.$error.required">Please enter Description</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Labor Charge</label>
+                                        <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="LaborCharge" ng-model="Charges.LaborCharge" required placeholder="Enter a Labor Charge">
+                                        <span class="err-msg" ng-show="submitted==true && AddChargesform.LaborCharge.$error.required">Please enter Estimated Time</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" ng-click="submitted=true;AddPartsCharges(Charges,AddChargesform.$valid)" class="btn btn-outline-warning">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UpdateVehicleParts" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Vehicle Parts</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="AddPartsform" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Vehicle Parts</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="VehicleParts" ng-model="VehicleParts" required placeholder="Enter a Part">
+                                        <span class="err-msg" ng-show="submitted==true && AddPartsform.VehicleParts.$error.required">Please enter Vehicle Parts</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="addToList()"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <ul class="item-list" ng-show="partsArray.length>1 || partsArray!=''">
+                                    <li ng-repeat="item in partsArray" class="item">
+                                        <ul>
+                                            <li style="display:inline"> {{ item }}</li>
+                                            <li style="display:inline"><button ng-click="removePartValue(item)" class="btn btn-sm-primary"><i class="fa fa-minus"></i></button></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" ng-click="submitted=true;AddVehicleParts()" class="btn btn-outline-warning">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Activity Log</h5>
+                <hr>
+                <ul style=" list-style-type: circle; color: rgba(229,165,75);" ng-repeat="x in JobDetails.activityViewModels">
+                    <li class="mt-2" ng-show="!x.isJobStarted">
+                        Job move by {{x.userName}} to
+                        <span class="font-weight-bold">{{x.stageName}} : </span>
+                        <small>{{x.startTime | date:'MM-dd-yyyy HH:mm:ss'}}</small><br />
+
+                    </li>
+                    <li class="mt-2" ng-show="x.isJobStarted">
+                        job picked by {{x.userName}} in <span class="font-weight-bold">{{x.stageName}}</span> By
+                        <small>{{x.startTime | date:'MM-dd-yyyy HH:mm:ss'}}</small><br />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

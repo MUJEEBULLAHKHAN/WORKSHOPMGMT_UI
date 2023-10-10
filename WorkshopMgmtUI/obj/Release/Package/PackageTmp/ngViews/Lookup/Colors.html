@@ -1,0 +1,88 @@
+﻿<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <button data-bs-toggle="modal" data-bs-target="#AddColor" class="btn btn-primary float-end">Add Color</button>
+                <h3>Colors List</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>Color Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in ColorsList">
+                            <td>{{c.colorName}}</td>
+                            <td class="table-action">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#UpdateColor" ng-click="EditColor(c)" class="btn btn-primary my-2"><i class="fa fa-edit"></i></button>
+                                <button type="button" ng-click="DeleteColor(c.colorId)" class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="AddColor" tabindex="-1" Color="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" Color="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Color</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="ColorForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Color Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="ColorName" required ng-model="Color.ColorName" placeholder="Enter a Color">
+                                        <span class="err-msg" ng-show="submitted==true && ColorForm.ColorName.$error.required">Please enter Color Name</span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;AddColor(Color,ColorForm.$valid)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UpdateColor" tabindex="-1" Color="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" Color="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Color</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="UpdateForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Color Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="ColorName" required ng-model="ColorDetails.colorName" placeholder="Enter a Color">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.ColorName.$error.required">Please enter Color Name</span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;UpdateColor(ColorDetails,UpdateForm.$valid)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

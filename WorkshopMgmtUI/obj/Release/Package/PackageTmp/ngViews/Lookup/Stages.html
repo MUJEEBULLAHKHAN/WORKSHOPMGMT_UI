@@ -1,0 +1,100 @@
+﻿<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <button data-bs-toggle="modal" data-bs-target="#AddStage" class="btn btn-primary float-end">Add Stage</button>
+                <h3>Stages List</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>Stage No</th>
+                            <th>Stage Name</th>
+                            <th>Stage Name (Ar)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in StagesList">
+                            <td>{{c.stageNo}}</td>
+                            <td>{{c.stageName}}</td>
+                            <td>{{c.stageNameAr}}</td>
+                            <td class="table-action">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#UpdateStage" ng-click="EditStage(c)" class="btn btn-primary my-2"><i class="fa fa-edit"></i></button>
+                                <button type="button" ng-click="DeleteStage(c.stageId)" class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="AddStage" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Stage</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="StageForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Stage Number</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageNo" required ng-model="Stage.StageNo" placeholder="Enter a value">
+                                        <span class="err-msg" ng-show="submitted==true && StageForm.StageNo.$error.required">Please enter Stage Number</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Stage Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageName" required ng-model="Stage.StageName" placeholder="Enter a value">
+                                        <span class="err-msg" ng-show="submitted==true && StageForm.StageName.$error.required">Please enter Stage Name</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;AddStage(Stage,StageForm.$valid)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="UpdateStage" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Stage</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                    <form name="UpdateForm" novalidate autocomplete="off">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-cols-md-auto align-items-center">
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Stage Number</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageNo" required ng-model="StageDetails.stageNo" placeholder="Enter a stage no">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.StageNo.$error.required">Please enter Stage Number</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="sr-only" for="inlineFormInputName2">Stage Name</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" name="StageName" required ng-model="StageDetails.stageName" placeholder="Enter stage name">
+                                        <span class="err-msg" ng-show="submitted==true && UpdateForm.StageName.$error.required">Please enter Stage Name</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary mb-2" ng-click="submitted=true;UpdateStage(StageDetails,UpdateForm.$valid)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+﻿<div class="row" dir="rtl">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body m-sm-3 m-md-5" id="contentToPrint">
+                <div class="mb-4">
+                    <strong>{{InvoiceDetails.vehicleMake}}</strong> {{InvoiceDetails.vehicleModel}},
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-muted">رقم المطالبة </div>
+                        <strong>{{InvoiceDetails.jobId}}</strong>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <div class="text-muted">التاريخ </div>
+                        <strong dir="ltr">{{InvoiceDetails.invDate | date:'dd-MMM-yyyy'}}</strong>
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="text-muted">مركبة</div>
+                        <strong>
+                            نوع المركبة / النتراء
+                        </strong>{{InvoiceDetails.vehicleMake}}
+                        <p>
+                            <strong>طراز السيارة : </strong>{{InvoiceDetails.vehicleModel}}
+
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <div class="text-muted">More Info</div>
+                        <strong>
+                            رقم اللوحة / دق د  :
+                        </strong>{{InvoiceDetails.plateNo}}
+                        <p>
+                            <strong>
+                                اللون / رصاصي :
+                            </strong>{{InvoiceDetails.color}}
+                            <!--<br> Denver <br> 80202 <br> USA <br>
+                <a href="#">
+                    info@appstack.com
+                </a>-->
+                        </p>
+                    </div>
+                </div>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>وصف</th>
+                            <td>&nbsp;</td>
+                            <th class="text-end">مبلغ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>أجور الإصلاح </td>
+                            <td>&nbsp;</td>
+                            <td class="text-end">{{InvoiceDetails.laborCharge}}</td>
+                        </tr>
+                        <tr>
+                            <td>قطع الغيار بعد الخصم  </td>
+                            <td>&nbsp;</td>
+                            <td class="text-end">0.00</td>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>الإجمالي قبل الضريبة </th>
+                            <th class="text-end">{{InvoiceDetails.laborCharge}}</th>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>ضريبة </th>
+                            <th class="text-end">15%</th>
+                        </tr>
+
+                        <!--<tr>
+                <th>&nbsp;</th>
+                <th>Subtotal </th>
+                <th class="text-end">$275.00</th>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Shipping </th>
+                <th class="text-end">$8.00</th>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Discount </th>
+                <th class="text-end">5%</th>
+            </tr>-->
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>الإجمالي بعد الضريبة  </th>
+                            <th class="text-end">{{InvoiceDetails.totalCharge}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!--<div class="text-center">
+        <p class="text-sm">
+            <strong>Extra note:</strong> Please send all items at the same time to the shipping address. Thanks in advance.
+        </p>
+
+
+    </div>-->
+            </div>
+            <div class="text-center mb-2">
+                <button ng-click="print()" class="btn btn-primary">
+                    اطبع هذا الإيصال
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

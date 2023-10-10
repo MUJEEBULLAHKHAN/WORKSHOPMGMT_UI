@@ -1,0 +1,343 @@
+﻿<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <a href="/CreateJob" class="btn btn-primary ">إنشاء وظيفة جديدة</a>
+                <h3 class="float-end">قائمة الوظائف</h3>
+            </div>
+            <div class="table-responsive" dir="rtl">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>صناعة المركبات</th>
+                            <th>طراز السيارة</th>
+                            <th>سنة</th>
+                            <th>لون</th>
+                            <th>اسم الزبون</th>
+                            <th>نوع العميل</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in JobList">
+                            <td>{{c.vehicleMake}}</td>
+                            <td>{{c.vehicleModel}}</td>
+                            <td>{{c.year | date : 'yyyy'}}</td>
+                            <td>{{c.colorName}}</td>
+                            <td>{{c.customerName}}</td>
+                            <td>{{c.customerType}}</td>
+                            <td class="table-action">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#JobDescription" ng-click="GetJob(c.jobId)" class="btn btn-primary my-2">عرض التفاصيل</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#ViewParts" ng-click="GetJob(c.jobId)" class="btn btn-primary my-2">عرض الأجزاء</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    ul.details li {
+        font-size: 14px;
+        line-height: 50px;
+        float: left;
+        list-style-type: square;
+        width: 50%;
+    }
+
+        ul.details li::marker {
+            font-size: 20px;
+            list-style-type: circle;
+            color: rgba(229,165,75);
+        }
+</style>
+<div class="modal fade" id="JobDescription" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div id="contentToPrint">
+                <div class="modal-header">
+                    <h5 class="modal-title">كرت استلام سيارة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="container-fluid p-5" dir="rtl">
+                    <h3>مركز الانجاز الحديث لصيانة السيارات</h3>
+                </div>
+                <div class="container" dir="rtl">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="card-body">
+                                <h3><strong>تاريخ الدخول  : {{JobDetails.jobCreated |date:'dd/MM/yyyy'}}</strong></h3>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <h3><strong class="float-end">وقت الاستلام : {{JobDetails.jobCreated |date:'hh:mm a'}}</strong></h3>
+                        </div>
+                        <hr />
+                        <div class="col-sm-4">
+                            <span class="font-weight-bold">اسم العميل : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.customerName}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="font-weight-bold">اسم الشركة : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.workshopName}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="font-weight-bold">المؤمن له : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.isInsured}}</span>
+                        </div>
+                        <hr />
+                        <div class="col-sm-6">
+                            <span class="font-weight-bold">رقم المطالبة : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.jobId}}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="font-weight-bold">رقم العداد : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.odometer}}</span>
+                        </div>
+                        <hr />
+                        <!--<div class="col-sm-3">
+                            <span class="font-weight-bold">Type of car : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                        </div>-->
+                        <div class="col-sm-3">
+                            <span class="font-weight-bold">رقم اللوحة : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.plateNumber}}</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="font-weight-bold">لون السيارة : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                        </div>
+                        <!--<div class="col-sm-3">
+                            <span class="font-weight-bold">Car color : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.chassisNumber}}</span>
+                        </div>-->
+                        <hr />
+                        <!--<div class="col-sm-6">
+                            <span class="font-weight-bold">Towing van number : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.plateNumber}}</span>
+                        </div>-->
+                        <div class="col-sm-6">
+                            <span class="font-weight-bold">اسم السائق : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.customerName}}</span>
+                        </div>
+                        <hr />
+                        <!--<div class="col-sm-12">
+                            <span class="font-weight-bold">Damages : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.totalParts}}</span>
+                        </div>
+                        <hr />
+                        <div class="col-sm-12">
+                            <span class="font-weight-bold">Comments : </span>
+                            <span style="font-size: 0.8rem">{{JobDetails.odometer}}</span>
+                        </div>
+                        <hr />-->
+                        <div class="col-sm-12">
+                            <span class="font-weight-bold">ملاحظات : </span>
+                            <!--<span style="font-size: 0.8rem">{{JobDetails.odometer}}</span>-->
+                        </div>
+                        <hr />
+                        <div class="container-fluid p-3">
+                            <h3>الملحقات بالسيارة</h3>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <table class="table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>اسم الأجزاء</th>
+                                                <th>&nbsp;</th>
+                                                <th>توافر</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>كفر احتياطي</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.spareTyre" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.spareTyre" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.spareTyre ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>اللوحات</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.numberPlates" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.numberPlates" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.numberPlates ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>المسجل</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.cdPlay" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.cdPlay" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.cdPlay ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>العدة</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.toolKit" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.toolKit" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.toolKit ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>المكيف</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.airCondition" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.airCondition" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.airCondition ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>لمية ABS</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.absLight" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.absLight" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.absLight ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="col-sm-4">
+                                    <table class="table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>اسم الأجزاء</th>
+                                                <th>&nbsp;</th>
+                                                <th>توافر</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>مفتاح تشغيل</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.carKey" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.carKey" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.carKey ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>لمية ماكينة</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.checkEngineLight" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.checkEngineLight" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.checkEngineLight ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>البطاريات</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.batteries" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.batteries" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.batteries ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>طاسات</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.wheelCaps" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.wheelCaps" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.wheelCaps ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>لية إيرباج</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.airbagsLight" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.airbagsLight" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.airbagsLight ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>فرشات أرضية</td>
+                                                <!--<td><input class="form-check-input" type="radio" ng-model="JobDetails.floorMats" ng-value="true"></td>
+                    <td><input class="form-check-input" type="radio" ng-model="JobDetails.floorMats" ng-value="false"></td>-->
+                                                <td>&nbsp;</td>
+                                                <td>{{ JobDetails.floorMats ? 'موجود' : 'غیر موجود' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-sm-4">
+
+                                    <span><img class="img-thumbnail rounded me-2 mb-2" height="200" width="200" src="/img/CarBluePrint.jpg" /></span>
+
+
+                                </div>
+                            </div>
+
+                           
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                        <span class="font-weight-bold">1- مصرح له بفتح قطع غيار السيارات والثابتة </span>
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                        <span class="font-weight-bold">2- ان المركز غير مسؤول عن الأغراض الشخصية الموجودة بالسيارة </span>
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                        <span class="font-weight-bold">3- إذا تأخرت السيارة بعد الانتهاء من الإصلاح عشرة أيام أتعهد بدفع غرامة خمسة وعشرون (٢٥)</span>
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                        <span class="font-weight-bold">4- يحق للورشة تجرية السيارة بعد الانتهاء من … </span>
+                    </div>
+                    <hr />
+                    <div class="col-sm-6">
+                        <span class="font-weight-bold">رقم الجوال : </span>
+                        <span style="font-size: 0.8rem">{{JobDetails.mobileNo}}</span>
+                    </div>
+                    <!--<div class="col-sm-6">
+                        <span class="font-weight-bold">Mobile number -2</span>
+                        <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="font-weight-bold">Car received by  </span>
+                        <span style="font-size: 0.8rem">{{JobDetails.colorName}}</span>
+                    </div>-->
+                    <div class="col-sm-6">
+                        <span class="font-weight-bold">توقيع العميل</span>
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                        <h3>الرياض - مخرج 18 صناعية الدائري خلف شركة العيس ائي</h3>
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="button" ng-click="print()" class="btn btn-primary my-2">Print</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="ViewParts" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">قطع غيار المركبات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="col-md-12" dir="rtl">
+                <!--<h1 class="text-center"></h1>-->
+                <div class="card">
+                    <div class="card-body" id="partscontent">
+                        <ul ng-show="partsArray.length>1 || partsArray!=''">
+                            <li ng-repeat="item in partsArray"> {{ item }}</li>
+                        </ul>
+
+                    </div>
+                    <div class="text-center">
+                        <button type="button" ng-click="PrintParts()" class="btn btn-primary my-2">طبع</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

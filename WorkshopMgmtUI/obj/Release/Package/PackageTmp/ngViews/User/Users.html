@@ -1,0 +1,36 @@
+﻿<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <a href="/AddUser" class="btn btn-primary float-end">Add User</a>
+                <h3 >Users List</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle table-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Role Name</th>
+                            <!--<th>Actions</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in UsersList">
+                            <td>{{c.name}}</td>
+                            <td>{{c.mobileNo}}</td>
+                            <td>{{c.emailId}}</td>
+                            <td>{{c.roleName}}</td>
+                            <!--<td class="table-action">
+                                <button type="button" ng-click="EditUser(c)" class="btn btn-primary my-2"><i class="fa fa-edit"></i></button>
+                                <button type="button" ng-click="DeleteUser(c.userId)" class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                            </td>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        </div>
+</div>

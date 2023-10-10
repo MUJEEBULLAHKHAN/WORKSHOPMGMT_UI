@@ -1,0 +1,118 @@
+﻿<div class="container d-flex flex-column" dir="rtl">
+    <div class="row h-100">
+        <div class="col-sm-10 col-md-8 col-lg-12 mx-auto d-table h-100">
+
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="text-center mt-4">
+                        <h1 class="h2">ورشة عمل</h1>
+                        <p class="lead">
+
+                        </p>
+                    </div>
+                    <hr />
+                    <div class="m-sm-4">
+                        <form name="Workshopform" novalidate autocomplete="off">
+                            <div class="mb-3">
+                                <div class="">
+                                    <h5 class="card-title">الاسم الكامل للورشة</h5>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" name="WorkshopName" ng-model="Ws.WorkshopName" placeholder="name@example.com" required control-id="ControlID-3">
+                                            <label for="floatingInput1">اسم الورشة<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.WorkshopName.$error.required">الرجاء إدخال اسم الورشة</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingInput1" name="EmailId" ng-model="Ws.EmailId" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">عنوان البريد الإلكتروني<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.EmailId.$error.required">الرجاء إدخال عنوان البريد الإلكتروني</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="floatingInput1" ng-pattern="/^05\d{8}$/" name="MobileNo" ng-model="Ws.MobileNo" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">رقم الهاتف المحمول #<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.MobileNo.$error.required">الرجاء إدخال رقم الجوال</span>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.MobileNo.$error.pattern">الرجاء إدخال رقم جوال صحيح</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control" id="floatingInput1" ng-maxlength="20" ng-minlength="6" name="Password" ng-model="Ws.Password" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">كلمة المرور<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.Password.$error.required">الرجاء إدخال كلمة المرور</span>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.Password.$error.minlength">يجب أن تكون كلمة المرور 6 أحرف على الأقل</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control" id="floatingInput1" name="ConfirmPassword" ng-model="Ws.ConfirmPassword" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">تأكيد كلمة المرور<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.ConfirmPassword.$error.required">الرجاء إدخال تأكيد كلمة المرور</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="floatingInput1" name="Vat" ng-model="Ws.Vat" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">ضريبة القيمة المضافة #<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.Vat.$error.required">الرجاء إدخال ضريبة القيمة المضافة</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="floatingInput1" name="LaborRate" ng-model="Ws.LaborRate" required placeholder="name@example.com" control-id="ControlID-3">
+                                            <label for="floatingInput1">معدل لابوت<span class="text-danger">*</span></label>
+                                            <span class="err-msg" ng-show="submitted==true && Workshopform.LaborRate.$error.required">الرجاء إدخال معدل العمالة</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <input type="file" class="form-control" fileread="CRDoc" id="CRDoc" name="CR" required>
+                                            <label for="floatingInput1">CR Doc<span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" rows="3" id="floatingInput1" name="WorkshopAddress" ng-model="Ws.WorkshopAddress" placeholder="name@example.com" required control-id="ControlID-3"></textarea>
+                                        <label for="floatingInput1">عنوان<span class="text-danger">*</span></label>
+                                        <span class="err-msg" ng-show="submitted==true && Workshopform.WorkshopAddress.$error.required">الرجاء إدخال عنوان ورشة العمل</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="text-center mt-3">
+                                <button style="width:30%;" ng-click="submitted=true;RegisterWorkshop(Ws,Workshopform.$valid)" type="submit" class="btn btn-outline-warning">يُقدِّم</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
